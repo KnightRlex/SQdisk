@@ -1,4 +1,4 @@
-import { invoke } from "@tauri-apps/api/tauri";
+import { invoke } from "@tauri-apps/api/core";
 import prettyBytes from "pretty-bytes";
 import { getIconForFolder } from "vscode-icons-js";
 // import { iconImages } from "./iconImages";

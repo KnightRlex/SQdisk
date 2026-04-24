@@ -1,0 +1,23 @@
+{
+  "languageName": "Português",
+  "home": {
+    "selectFolder": "Selecionar uma pasta para verificar",
+    "tip": "Dica: Clique com o botão direito para uma verificação completa do disco (mais lento)"
+  },
+  "scanning": {
+    "scanning": "Verificando",
+    "back": "Voltar"
+  },
+  "breadcrumb": {
+    "allDisks": "Todos os discos",
+    "disk": "Disco",
+    "folder": "Pasta"
+  },
+  "diskDetail": {
+    "dragToDelete": "Arraste arquivos e pastas aqui para excluir",
+    "filesSelected": "{{count}} arquivos selecionados -",
+    "clearSelection": "Limpar seleção",
+    "delete": "Excluir",
+    "deleting": "Excluindo {{current}} de {{total}}"
+  }
+}

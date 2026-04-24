@@ -1,0 +1,23 @@
+{
+  "languageName": "Nederlands",
+  "home": {
+    "selectFolder": "Selecteer een map om te scannen",
+    "tip": "Tip: Rechtsklikken voor een volledige schijfscan (langzamer)"
+  },
+  "scanning": {
+    "scanning": "Scannen",
+    "back": "Terug"
+  },
+  "breadcrumb": {
+    "allDisks": "Alle schijven",
+    "disk": "Schijf",
+    "folder": "Map"
+  },
+  "diskDetail": {
+    "dragToDelete": "Sleep bestanden en mappen hierheen om te verwijderen",
+    "filesSelected": "{{count}} bestanden geselecteerd -",
+    "clearSelection": "Selectie wissen",
+    "delete": "Verwijderen",
+    "deleting": "{{current}} van {{total}} verwijderen"
+  }
+}

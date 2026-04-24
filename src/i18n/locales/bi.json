@@ -1,0 +1,23 @@
+{
+  "languageName": "Bahasa Indonesia",
+  "home": {
+    "selectFolder": "Pilih folder untuk dipindai",
+    "tip": "Tip: Klik kanan untuk pemindaian disk penuh (lebih lambat)"
+  },
+  "scanning": {
+    "scanning": "Memindai",
+    "back": "Kembali"
+  },
+  "breadcrumb": {
+    "allDisks": "Semua disk",
+    "disk": "Disk",
+    "folder": "Folder"
+  },
+  "diskDetail": {
+    "dragToDelete": "Seret file dan folder ke sini untuk dihapus",
+    "filesSelected": "{{count}} file terpilih -",
+    "clearSelection": "Hapus pilihan",
+    "delete": "Hapus",
+    "deleting": "Menghapus {{current}} dari {{total}}"
+  }
+}

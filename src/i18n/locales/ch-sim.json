@@ -1,0 +1,23 @@
+{
+  "languageName": "简体中文",
+  "home": {
+    "selectFolder": "选择要扫描的文件夹",
+    "tip": "提示：右键单击进行全盘扫描（较慢）"
+  },
+  "scanning": {
+    "scanning": "扫描中",
+    "back": "返回"
+  },
+  "breadcrumb": {
+    "allDisks": "所有磁盘",
+    "disk": "磁盘",
+    "folder": "文件夹"
+  },
+  "diskDetail": {
+    "dragToDelete": "将文件和文件夹拖到此处删除",
+    "filesSelected": "已选择 {{count}} 个文件 -",
+    "clearSelection": "清除选择",
+    "delete": "删除",
+    "deleting": "正在删除 {{current}} / {{total}}"
+  }
+}

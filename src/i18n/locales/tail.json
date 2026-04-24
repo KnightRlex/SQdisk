@@ -1,0 +1,23 @@
+{
+  "languageName": "ไทย",
+  "home": {
+    "selectFolder": "เลือกโฟลเดอร์เพื่อสแกน",
+    "tip": "เคล็ดลับ: คลิกขวาเพื่อสแกนดิสก์ทั้งหมด (ช้ากว่า)"
+  },
+  "scanning": {
+    "scanning": "กำลังสแกน",
+    "back": "กลับ"
+  },
+  "breadcrumb": {
+    "allDisks": "ดิสก์ทั้งหมด",
+    "disk": "ดิสก์",
+    "folder": "โฟลเดอร์"
+  },
+  "diskDetail": {
+    "dragToDelete": "ลากไฟล์และโฟลเดอร์มาที่นี่เพื่อลบ",
+    "filesSelected": "เลือกแล้ว {{count}} ไฟล์ -",
+    "clearSelection": "ล้างการเลือก",
+    "delete": "ลบ",
+    "deleting": "กำลังลบ {{current}} จาก {{total}}"
+  }
+}

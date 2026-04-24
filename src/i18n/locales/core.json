@@ -1,0 +1,23 @@
+{
+  "languageName": "한국어",
+  "home": {
+    "selectFolder": "스캔할 폴더 선택",
+    "tip": "팁: 전체 디스크 스캔을 원하면 마우스 오른쪽 버튼 클릭 (느림)"
+  },
+  "scanning": {
+    "scanning": "스캔 중",
+    "back": "뒤로"
+  },
+  "breadcrumb": {
+    "allDisks": "모든 디스크",
+    "disk": "디스크",
+    "folder": "폴더"
+  },
+  "diskDetail": {
+    "dragToDelete": "삭제할 파일 및 폴더를 여기로 드래그하세요",
+    "filesSelected": "{{count}}개 파일 선택됨 -",
+    "clearSelection": "선택 취소",
+    "delete": "삭제",
+    "deleting": "{{total}}개 중 {{current}}개 삭제 중"
+  }
+}

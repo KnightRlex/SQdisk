@@ -1,0 +1,23 @@
+{
+  "languageName": "العربية",
+  "home": {
+    "selectFolder": "حدد مجلدًا للفحص",
+    "tip": "نصيحة: انقر بزر الماوس الأيمن لإجراء فحص كامل للقرص (أبطأ)"
+  },
+  "scanning": {
+    "scanning": "جاري الفحص",
+    "back": "رجوع"
+  },
+  "breadcrumb": {
+    "allDisks": "جميع الأقراص",
+    "disk": "قرص",
+    "folder": "مجلد"
+  },
+  "diskDetail": {
+    "dragToDelete": "اسحب الملفات والمجلدات هنا لحذفها",
+    "filesSelected": "تم تحديد {{count}} ملف -",
+    "clearSelection": "مسح التحديد",
+    "delete": "حذف",
+    "deleting": "جاري حذف {{current}} من {{total}}"
+  }
+}

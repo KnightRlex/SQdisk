@@ -10,7 +10,8 @@ use serde::Serialize;
 use std::process::Command;
 use std::sync::Mutex;
 use sysinfo::{DiskExt, System, SystemExt};
-use tauri::api::process::CommandChild;
+// CAMBIO: usar el proceso del plugin de shell
+use tauri_plugin_shell::process::CommandChild; 
 use tauri::Manager;
 
 #[cfg(target_os = "macos")]
@@ -21,7 +22,7 @@ use {std::fs::metadata, std::path::PathBuf};
 
 #[derive(Serialize)]
 #[serde(rename_all = "camelCase")]
-struct SquirrelDisk<'a> {
+struct SQDisk<'a> {
     name: &'a str,
     s_mount_point: String,
     total_space: u64,
@@ -31,25 +32,27 @@ struct SquirrelDisk<'a> {
 
 fn main() {
     tauri::Builder::default()
+        
+        .plugin(tauri_plugin_shell::init())
+        .plugin(tauri_plugin_os::init())     
+        .plugin(tauri_plugin_fs::init())     
+        .plugin(tauri_plugin_dialog::init()) 
+        
         .manage(MyState(Default::default()))
         .setup(|app| {
-            let window = app.get_window("main").unwrap();
-            // window.open_devtools();
+            let window = app.get_webview_window("main").unwrap();
+            
             #[cfg(target_os = "macos")]
             window_vibrancy::apply_vibrancy(&window, NSVisualEffectMaterial::HudWindow, None, None)
                 .expect("Error applying blurred bg");
 
             #[cfg(target_os = "windows")]
-            window_vibrancy::apply_blur(&window, Some((18, 18, 18, 125)))
+            window_vibrancy::apply_blur(&window, Some((18, 18, 18, 60)))
                 .expect("Error applying blurred bg");
 
             #[cfg(any(windows, target_os = "macos"))]
             window_style::set_window_styles(&window).unwrap();
 
-            // app.listen_global("scan_stop", |event| {
-            //     let s = app.state::<MyState>();
-            //     s.0.lock().unwrap().take().unwrap().kill();
-            // });
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
@@ -69,15 +72,13 @@ fn show_in_folder(path: String) {
         let re = Regex::new(r"/").unwrap();
         let result = re.replace_all(&path, "\\");
         Command::new("explorer")
-            .args(["/select,", format!("{}", result).as_str()]) // The comma after select is not a typo
+            .args(["/select,", format!("{}", result).as_str()])
             .spawn()
             .unwrap();
     }
 
     #[cfg(target_os = "linux")]
     {
-        // if path.contains(",") {
-        // see https://gitlab.freedesktop.org/dbus/dbus/-/issues/76
         let new_path = match metadata(&path).unwrap().is_dir() {
             true => path,
             false => {
@@ -87,20 +88,6 @@ fn show_in_folder(path: String) {
             }
         };
         Command::new("xdg-open").arg(&new_path).spawn().unwrap();
-        // } else {
-        //     Command::new("dbus-send")
-        //         .args([
-        //             "--session",
-        //             "--dest=org.freedesktop.FileManager1",
-        //             "--type=method_call",
-        //             "/org/freedesktop/FileManager1",
-        //             "org.freedesktop.FileManager1.ShowItems",
-        //             format!("array:string:\"file://{path}\"").as_str(),
-        //             "string:\"\"",
-        //         ])
-        //         .spawn()
-        //         .unwrap();
-        // }
     }
 
     #[cfg(target_os = "macos")]
@@ -108,16 +95,16 @@ fn show_in_folder(path: String) {
         Command::new("open").args(["-R", &path]).spawn().unwrap();
     }
 }
-// Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
+
 #[tauri::command]
 fn get_disks() -> String {
     let mut sys = System::new_all();
     sys.refresh_all();
 
-    let mut vec: Vec<SquirrelDisk> = Vec::new();
+    let mut vec: Vec<SQDisk> = Vec::new();
 
     for disk in sys.disks() {
-        vec.push(SquirrelDisk {
+        vec.push(SQDisk {
             name: disk.name().to_str().unwrap(),
             s_mount_point: disk.mount_point().display().to_string(),
             total_space: disk.total_space(),

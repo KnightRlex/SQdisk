@@ -1,0 +1,23 @@
+{
+  "languageName": "Deutsch",
+  "home": {
+    "selectFolder": "Wählen Sie einen Ordner zum Scannen",
+    "tip": "Tipp: Rechtsklick für einen vollständigen Festplattenscan (langsamer)"
+  },
+  "scanning": {
+    "scanning": "Scannen",
+    "back": "Zurück"
+  },
+  "breadcrumb": {
+    "allDisks": "Alle Laufwerke",
+    "disk": "Laufwerk",
+    "folder": "Ordner"
+  },
+  "diskDetail": {
+    "dragToDelete": "Ziehen Sie Dateien und Ordner zum Löschen hierher",
+    "filesSelected": "{{count}} Dateien ausgewählt -",
+    "clearSelection": "Auswahl aufheben",
+    "delete": "Löschen",
+    "deleting": "Lösche {{current}} von {{total}}"
+  }
+}

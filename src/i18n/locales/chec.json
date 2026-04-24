@@ -1,0 +1,23 @@
+{
+  "languageName": "Čeština",
+  "home": {
+    "selectFolder": "Vyberte složku ke skenování",
+    "tip": "Tip: Klikněte pravým tlačítkem pro úplné skenování disku (pomalejší)"
+  },
+  "scanning": {
+    "scanning": "Skenování",
+    "back": "Zpět"
+  },
+  "breadcrumb": {
+    "allDisks": "Všechny disky",
+    "disk": "Disk",
+    "folder": "Složka"
+  },
+  "diskDetail": {
+    "dragToDelete": "Přetáhněte sem soubory a složky k odstranění",
+    "filesSelected": "{{count}} vybraných souborů -",
+    "clearSelection": "Zrušit výběr",
+    "delete": "Odstranit",
+    "deleting": "Odstraňování {{current}} z {{total}}"
+  }
+}

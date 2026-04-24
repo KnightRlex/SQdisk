@@ -1,16 +1,11 @@
-# SquirrelDisk
+# SQDisk
 
 <br>
 
 <p align="center">
-    <a href="https://github.com/adileo/squirreldisk"><img src="https://img.shields.io/github/v/release/adileo/squirreldisk?color=%23ff00a0&include_prereleases&label=version&sort=semver&style=flat-square"></a>
-     &nbsp;
-      <a href="https://github.com/adileo/squirreldisk"><img src="https://shields.io/badge/-ALPHA-orange?color=%23ff00a0&include_prereleases&label=status&sort=semver&style=flat-square"></a>
+    <img src="https://img.shields.io/badge/built_with-Rust-dca282.svg?style=flat-square">
     &nbsp;
-    <a href="https://github.com/adileo/squirreldisk"><img src="https://img.shields.io/badge/built_with-Rust-dca282.svg?style=flat-square"></a>
-     &nbsp;
-     <a href="https://discord.gg/Xp8QtMM65w"><img src="https://img.shields.io/badge/Discord-%235865F2.svg?style=flat-square&logo=discord&logoColor=white"></a>
-   
+    <img src="https://img.shields.io/badge/Tauri-2.0-blue?style=flat-square&logo=tauri">
 </p>
 
 <div align="center">
@@ -21,64 +16,54 @@
 
 ![Screenshot](/public/squirrel-demo-2.gif)
 
-## What's taking your hard disk space?
+</div>
 
-The easiest open source app you will ever use to detect huge files. Built with Rust + React (Tauri).
+## ¿Qué está ocupando tu espacio en disco?
 
-Squirreldisk is an open source alternative to softwares like: WinDirStat, WizTree, TreeSize and DaisyDisk.
+**SQDisk** es un **fork** del proyecto original SquirrelDisk, optimizado y actualizado para ofrecer una experiencia moderna. Es la herramienta de código abierto más intuitiva para localizar archivos de gran tamaño que consumen tu almacenamiento.
 
-Some features:
+Es una alternativa eficiente y ligera a softwares como WinDirStat, WizTree, TreeSize y DaisyDisk.
 
-- Fast scan and deep directory scanning
-- Disk scanning or pick a directory
-- External disks real-time detection
-- A sunburst chart to quickly visualize the disk usage
-- Drag and drop: collect all items to be deleted
-- Right click on a folder/file to open the file explorer
-- Cross-Platform MacOS, Windows, Linux
-- Auto-updater: get notified when there is a new update (only on app launch - no notification spamming thanks)
+### 🚀 Novedades en SQDisk
+* **Migración a Tauri 2.0**: Actualización completa del framework para aprovechar las últimas mejoras en seguridad y rendimiento.
+* **Cronómetro de Escaneo**: Se ha añadido un timer en tiempo real para monitorear el progreso y la duración del análisis, para verificar el timepo y que el usuario note que la UI no se ha congelado.
+* **Soporte Multiidioma**: La aplicación ahora es totalmente internacional, permitiendo su uso en diversos idiomas.
+* **Base Modernizada**: Mantenemos las mejores funciones del original bajo una arquitectura más actual.
 
-## Installation
+### Características
+- Escaneo rápido de unidades completas o directorios específicos.
+- **Gráfico Sunburst**: Visualiza de forma jerárquica y colorida qué carpetas ocupan más espacio.
+- Detección automática de discos externos.
+- **Drag and Drop**: Arrastra archivos y carpetas a una zona de recolección para eliminarlos masivamente.
+- Acceso directo al explorador de archivos desde la app.
+- Multiplataforma (Windows, macOS, Linux).
 
-Please note that the current version is not 100% stable yet, and you may encounter bugs.
+---
+> [!CAUTION]
+>## 🛠 Estado del Proyecto y Bugs Conocidos
+Esta versión se encuentra en desarrollo activo.
+* **UI Lag/Freeze**: Se ha identificado un ligero congelamiento de la interfaz durante el **escaneo profundo (slow scan)**. Estamos trabajando en mejorar el manejo de hilos en Rust para solucionar este comportamiento.
 
-### Windows
+---
 
-1. Download the installer from the [release page](https://github.com/adileo/squirreldisk/releases)
-2. The binary is not signed so Windows could open a popup window warning you that the file is unsecure, just click on "More Information" > "Run Anyway"
+> [!IMPORTANT]  
+>### Windows
+1. Al no estar firmado digitalmente, Windows puede mostrar una advertencia. Haz clic en "Más información" y luego en "Ejecutar de todas formas".
 
-[Why the binary isn't Codesigned and marked as unsafe?](https://news.ycombinator.com/item?id=19330062)
+>### Ubuntu / Linux
+1. Instálalo mediante la terminal o tu centro de software.
 
-### Ubuntu
+>### MacOS
+1. Para la primera ejecución: **Clic derecho > Abrir**. Si aparece un aviso de seguridad, ciérralo y repite **Clic derecho > Abrir**. Esto solo es necesario la primera vez.
 
-1. Download the .deb package from the [release page](https://github.com/adileo/squirreldisk/releases)
-2. Install
+> [!WARNING] 
+> Aun no testeado en Mac/Linux
 
-### MacOS
+---
 
-1. Download the .dmg from the [release page](https://github.com/adileo/squirreldisk/releases)
-2. Install the app from the .dmg
-3. First time you open the App: `Right click > Open` once (it won't run, since the binaries are not signed an alert will appear), then do it again `Right click > Open` to bypass the issue, it won't happen again after the first time.
+## Créditos
+* **SquirrelDisk**: Proyecto base original.
+* **Tauri Framework**: Motor de la aplicación.
+* React
 
-## Disclaimer
-
-This app was a project from 2 years ago built in Electron in 2 days, I decided to port it to Tauri to achieve better performances and to make it Open Source. Yay.
-
-The code is still spaghetti and needs a lot of refactoring.
-
-## Bug Reporting
-
-If you find any bugs, please report it by submitting an issue on our [issue page](https://github.com/adileo/squirreldisk/issues) with a detailed explanation. Giving some screenshots would also be very helpful.
-
-## Feature Request
-
-You can also submit a feature request on our [issue page](https://github.com/adileo/squirreldisk/issues) or [discussions](https://github.com/adileo/squirreldisk/discussions) and we will try to implement it as soon as possible.
-
-## Contributions
-
-- [Join our Discord Server](https://discord.gg/Xp8QtMM65w)
-
-## Credits
-
-- [parallel-disk-usage](https://github.com/KSXGitHub/parallel-disk-usage)
-- [tauri](https://github.com/tauri-apps/tauri)
+---

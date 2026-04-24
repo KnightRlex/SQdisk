@@ -6,15 +6,15 @@ html {
   height: 100%;
   background: transparent;
 }
-body {
-  background: #0a1125af;
 
+body {
+  background: #0a1125 !important; 
   height: 100%;
   -webkit-user-select: none;
 }
 
 .linuxbg{
-  background: #0a1125;
+  background: #0a1125 !important;
 }
 
 .titlebar {
@@ -27,8 +27,16 @@ body {
   -webkit-app-region: no-drag;
 }
 
+
+@keyframes keep-awake {
+  0% { opacity: 0.99; }
+  100% { opacity: 1; }
+}
+
 #root {
   height: 100%;
+  background: #0a1125 !important; 
+  animation: keep-awake 10s infinite linear;
 }
 
 ::-webkit-scrollbar {
@@ -50,4 +58,21 @@ body {
 .HW_badge_cont {
   width: 24px !important;
   height: 20px !important;
+}
+
+.d3-tooltip {
+  position: fixed;
+  pointer-events: none;
+  background: rgba(15, 23, 42, 0.95); 
+  color: white;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 15px;
+  line-height: 1.6;
+  max-width: 450px;
+  word-wrap: break-word;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  z-index: 9999;
+  border: 1px solid rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
 }

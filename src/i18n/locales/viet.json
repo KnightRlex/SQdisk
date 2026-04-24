@@ -1,0 +1,23 @@
+{
+  "languageName": "Tiếng Việt",
+  "home": {
+    "selectFolder": "Chọn một thư mục để quét",
+    "tip": "Mẹo: Nhấp chuột phải để quét toàn bộ ổ đĩa (chậm hơn)"
+  },
+  "scanning": {
+    "scanning": "Đang quét",
+    "back": "Quay lại"
+  },
+  "breadcrumb": {
+    "allDisks": "Tất cả ổ đĩa",
+    "disk": "Ổ đĩa",
+    "folder": "Thư mục"
+  },
+  "diskDetail": {
+    "dragToDelete": "Kéo tệp và thư mục vào đây để xóa",
+    "filesSelected": "Đã chọn {{count}} tệp -",
+    "clearSelection": "Bỏ chọn tất cả",
+    "delete": "Xóa",
+    "deleting": "Đang xóa {{current}} trên {{total}}"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "languageName": "Slovenčina",
+  "home": {
+    "selectFolder": "Vyberte priečinok na skenovanie",
+    "tip": "Tip: Kliknite pravým tlačidlom pre úplné skenovanie disku (pomalšie)"
+  },
+  "scanning": {
+    "scanning": "Skenovanie",
+    "back": "Späť"
+  },
+  "breadcrumb": {
+    "allDisks": "Všetky disky",
+    "disk": "Disk",
+    "folder": "Priečinok"
+  },
+  "diskDetail": {
+    "dragToDelete": "Potiahnite sem súbory a priečinky na odstránenie",
+    "filesSelected": "{{count}} vybraných súborov -",
+    "clearSelection": "Zrušiť výber",
+    "delete": "Odstrániť",
+    "deleting": "Odstraňovanie {{current}} z {{total}}"
+  }
+}

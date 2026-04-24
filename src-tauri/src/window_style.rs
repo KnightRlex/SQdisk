@@ -2,40 +2,22 @@
 // SPDX-License-Identifier: Apache-2.0
 // SPDX-License-Identifier: MIT
 
-//! Add native shadows to your windows.
-//!
-//! ## Platform-specific
-//!
-//! - **Windows**: On Windows 11, the window will also have rounded corners.
-//! - **macOS**: Shadows are always disabled for transparent windows.
-//! - **Linux**: Unsupported, Shadows are controlled by the compositor installed on the end-user system.
-//!
-//! # Example
-//!
-//! ```no_run
-//! use window_shadows::set_shadow;
-//!
-//! # let window: &dyn raw_window_handle::HasRawWindowHandle = unsafe { std::mem::zeroed() };
-//! #[cfg(any(windows, target_os = "macos"))]
-//! set_shadow(&window, true).unwrap();
-//! ```
+//! Add native shadows to your windows (y estilos de borde en Windows 11).
 
 /// Enables or disables the shadows for a window.
-///
-/// ## Platform-specific
-///
-/// - **Windows**: On Windows 11, the window will also have rounded corners.
-/// - **macOS**: Shadows are always disabled for transparent windows.
-/// - **Linux**: Unsupported, Shadows are controlled by the compositor installed on the end-user system.
-pub fn set_window_styles(window: impl raw_window_handle::HasRawWindowHandle) -> Result<(), Error> {
-    match window.raw_window_handle() {
+pub fn set_window_styles(window: impl raw_window_handle::HasWindowHandle) -> Result<(), Error> {
+    let handle = window.window_handle().map_err(|_| Error::UnsupportedPlatform)?;
+
+    match handle.as_raw() {
         #[cfg(target_os = "macos")]
         raw_window_handle::RawWindowHandle::AppKit(handle) => {
             use cocoa::{appkit::NSWindow, base::id};
-            use objc::runtime::YES;
+            use objc::{msg_send, runtime::YES};
 
             unsafe {
-                (handle.ns_window as id).setHasShadow_(YES);
+                let ns_view = handle.ns_view.as_ptr() as id;
+                let window: id = msg_send![ns_view, window];
+                window.setHasShadow_(YES);
             }
 
             Ok(())
@@ -49,19 +31,20 @@ pub fn set_window_styles(window: impl raw_window_handle::HasRawWindowHandle) -> 
             };
 
             unsafe {
-                // DwmExtendFrameIntoClientArea(handle.hwnd as _, &margins);
+                // CAMBIO: Usar .get() para extraer el isize del NonZero
+                let hwnd = handle.hwnd.get() as _;
 
                 DwmSetWindowAttribute(
-                    handle.hwnd as _,
-                    DWMWA_WINDOW_CORNER_PREFERENCE,
+                    hwnd,
+                    DWMWA_WINDOW_CORNER_PREFERENCE as u32,
                     &DWMWCP_ROUND as *const i32 as *const _,
                     std::mem::size_of::<i32>() as _,
                 );
 
                 let dark_color: COLORREF = 0x280606;
                 DwmSetWindowAttribute(
-                    handle.hwnd as _,
-                    DWMWA_BORDER_COLOR,
+                    hwnd,
+                    DWMWA_BORDER_COLOR as u32,
                     &dark_color as *const COLORREF as *const _,
                     std::mem::size_of::<COLORREF>() as _,
                 );
