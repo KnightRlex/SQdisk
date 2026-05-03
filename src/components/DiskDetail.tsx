@@ -17,6 +17,7 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { invoke } from "@tauri-apps/api/tauri";
 import { emit, listen } from "@tauri-apps/api/event";
 import { removeFile, removeDir } from "@tauri-apps/api/fs";
+import SelectionArea, { SelectionEvent } from "@viselect/react";
 
 (window as any).LockDNDEdgeScrolling = () => true;
 
@@ -52,6 +53,39 @@ const Scanning = () => {
 
   const [deleteList, setDeleteList] = useState<Array<D3HierarchyDiskItem>>([]);
   const deleteMap = useRef<Map<string, boolean>>(new Map());
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+
+  const selectedIdsRef = useRef(selectedIds);
+  useEffect(() => {
+    selectedIdsRef.current = selectedIds;
+  }, [selectedIds]);
+
+  const onBeforeStart = ({ event }: SelectionEvent) => {
+    const target = event?.target as HTMLElement | null;
+    /**
+     * If the user clicks on a file that is already selected, cancel the selection box so they can drag the files instead.
+     */
+    if (target?.closest(".selectable-file")) {
+      return false;
+    }
+  };
+
+  const onStart = ({ event, selection }: SelectionEvent) => {
+    if (!event?.ctrlKey && !event?.metaKey) {
+      selection.clearSelection();
+      setSelectedIds(new Set());
+    }
+  };
+
+  const onMove = ({ store: { changed: { added, removed } } }: SelectionEvent) => {
+    setSelectedIds((prev) => {
+      const next = new Set(prev);
+      added.forEach((element) => next.add(element.getAttribute("data-id")!));
+      removed.forEach((element) => next.delete(element.getAttribute("data-id")!));
+      return next;
+    });
+  };
+
   // Avvio il worker e attendo i dati
   useEffect(() => {
     if (baseData.current) {
@@ -167,23 +201,48 @@ const Scanning = () => {
       {view == "disk" && (
         <div className="flex-1 flex">
           <DragDropContext
+            onDragStart={(start) => {
+              const draggedId = start.draggableId;
+
+              if (!selectedIds.has(draggedId)) {
+                setSelectedIds(new Set());
+              }
+            }}
+
             onDragEnd={(result) => {
-              console.log(result);
               if (result.destination?.droppableId !== "deletelist") {
                 return;
               }
-              const item = focusedDirectory!.children!.find(
-                (i) => i.data.id === result.draggableId
-              );
-              setDeleteList((val) => {
-                if (!val.find((e) => e.data.id === item!.data.id)) {
-                  deleteMap.current.set(item!.data.id, true);
 
-                  return [...val, item!];
-                } else {
-                  return val;
-                }
+              const draggedId = result.draggableId;
+              const currentSelection = selectedIdsRef.current;
+              const isDraggedItemSelected = currentSelection.has(draggedId);
+
+              /**
+               * If the user drags a selected item, move the whole group. Otherwise, just move the single item they grabbed.
+               */
+              const itemsToMoveIds = isDraggedItemSelected
+                ? Array.from(currentSelection)
+                : [draggedId];
+
+              // Find the actual file objects to add to the delete list
+              const itemsToAdd = focusedDirectory!.children!.filter((i) =>
+                itemsToMoveIds.includes(i.data.id)
+              );
+
+              setDeleteList((val) => {
+                let newList = [...val];
+                itemsToAdd.forEach((item) => {
+                  if (!deleteMap.current.has(item.data.id)) {
+                    deleteMap.current.set(item.data.id, true);
+                    newList.push(item);
+                  }
+                });
+                return newList;
               });
+
+              // Clear selection after the drop is successful
+              setSelectedIds(new Set());
             }}
           >
             <div className="flex flex-1">
@@ -202,31 +261,53 @@ const Scanning = () => {
                     d3Chart={d3Chart}
                   ></ParentFolder>
                 )}
-                <Droppable droppableId="filelist">
-                  {(provided) => (
-                    <div
-                      className="overflow-y-auto"
-                      style={{ flex: "1 1 auto", height: 100 }}
-                      ref={provided.innerRef}
-                      {...provided.droppableProps}
-                    >
-                      {focusedDirectory &&
-                        focusedDirectory.children &&
-                        focusedDirectory.children.map((c, index) => (
-                          <FileLine
-                            key={c.data.id}
-                            item={c}
-                            hoveredItem={hoveredItem}
-                            d3Chart={d3Chart}
-                            index={index}
-                            deleteMap={deleteMap.current}
-                          ></FileLine>
-                        ))}
+                <SelectionArea
+                  className="container overflow-y-auto"
+                  style={{ flex: "1 1 auto", height: 100 }}
+                  onBeforeStart={onBeforeStart}
+                  onStart={onStart}
+                  onMove={onMove}
+                  selectables=".selectable-file" // Tells viselect which elements to track
+                  features={{
+                    // Prevents the selection box from triggering when clicking on buttons or scrollbars
+                    touch: false,
+                    range: true,
+                    singleTap: { allow: true, intersect: "native" },
+                  }}
+                >
+                  <Droppable droppableId="filelist">
+                    {(provided) => (
+                      <div
+                        ref={provided.innerRef}
+                        {...provided.droppableProps}
+                        className="p-4 min-h-full"
+                      >
+                        {focusedDirectory &&
+                          focusedDirectory.children &&
+                          focusedDirectory.children.map((c, index) => (
+                            <div
+                              key={c.data.id}
+                              className="selectable-file mb-1"
+                              data-id={c.data.id}
+                            >
+                              <FileLine
+                                key={c.data.id}
+                                item={c}
+                                hoveredItem={hoveredItem}
+                                d3Chart={d3Chart}
+                                index={index}
+                                deleteMap={deleteMap.current}
+                                isSelected={selectedIds.has(c.data.id)}
+                                selectedCount={selectedIds.size}
+                              ></FileLine>
+                            </div>
+                          ))}
 
-                      {provided.placeholder}
-                    </div>
-                  )}
-                </Droppable>
+                        {provided.placeholder}
+                      </div>
+                    )}
+                  </Droppable>
+                </SelectionArea>
                 <Droppable droppableId="deletelist">
                   {(provided) => (
                     <div
