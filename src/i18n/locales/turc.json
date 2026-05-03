@@ -1,0 +1,23 @@
+{
+  "languageName": "Türkçe",
+  "home": {
+    "selectFolder": "Taranacak bir klasör seçin",
+    "tip": "İpucu: Tam disk taraması için sağ tıklayın (daha yavaş)"
+  },
+  "scanning": {
+    "scanning": "Taranıyor",
+    "back": "Geri"
+  },
+  "breadcrumb": {
+    "allDisks": "Tüm diskler",
+    "disk": "Disk",
+    "folder": "Klasör"
+  },
+  "diskDetail": {
+    "dragToDelete": "Silmek için dosya ve klasörleri buraya sürükleyin",
+    "filesSelected": "{{count}} dosya seçildi -",
+    "clearSelection": "Seçimi temizle",
+    "delete": "Sil",
+    "deleting": "{{total}} üzerinden {{current}} siliniyor"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "languageName": "Italiano",
+  "home": {
+    "selectFolder": "Seleziona una cartella da scansionare",
+    "tip": "Suggerimento: Clic destro per una scansione completa del disco (più lento)"
+  },
+  "scanning": {
+    "scanning": "Scansione in corso",
+    "back": "Indietro"
+  },
+  "breadcrumb": {
+    "allDisks": "Tutti i dischi",
+    "disk": "Disco",
+    "folder": "Cartella"
+  },
+  "diskDetail": {
+    "dragToDelete": "Trascina qui file e cartelle per eliminarli",
+    "filesSelected": "{{count}} file selezionati -",
+    "clearSelection": "Cancella selezione",
+    "delete": "Elimina",
+    "deleting": "Eliminazione di {{current}} su {{total}}"
+  }
+}

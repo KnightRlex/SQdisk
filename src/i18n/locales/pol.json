@@ -1,0 +1,23 @@
+{
+  "languageName": "Polski",
+  "home": {
+    "selectFolder": "Wybierz folder do skanowania",
+    "tip": "Wskazówka: Kliknij prawym przyciskiem, aby wykonać pełne skanowanie dysku (wolniejsze)"
+  },
+  "scanning": {
+    "scanning": "Skanowanie",
+    "back": "Wróć"
+  },
+  "breadcrumb": {
+    "allDisks": "Wszystkie dyski",
+    "disk": "Dysk",
+    "folder": "Folder"
+  },
+  "diskDetail": {
+    "dragToDelete": "Przeciągnij pliki i foldery tutaj, aby usunąć",
+    "filesSelected": "Wybrano plików: {{count}} -",
+    "clearSelection": "Wyczyść wybór",
+    "delete": "Usuń",
+    "deleting": "Usuwanie {{current}} z {{total}}"
+  }
+}

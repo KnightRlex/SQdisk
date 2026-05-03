@@ -1,0 +1,23 @@
+{
+  "languageName": "English",
+  "home": {
+    "selectFolder": "Select a folder to Scan",
+    "tip": "Tip: Right Click for a full disk scan (slower)"
+  },
+  "scanning": {
+    "scanning": "Scanning",
+    "back": "Back"
+  },
+  "breadcrumb": {
+    "allDisks": "All Disks",
+    "disk": "Disk",
+    "folder": "Folder"
+  },
+  "diskDetail": {
+    "dragToDelete": "Drag file and folders here to delete",
+    "filesSelected": "{{count}} files selected -",
+    "clearSelection": "Clear Selection",
+    "delete": "Delete",
+    "deleting": "Deleting {{current}} of {{total}}"
+  }
+}

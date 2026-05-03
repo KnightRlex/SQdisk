@@ -1,0 +1,23 @@
+{
+  "languageName": "Română",
+  "home": {
+    "selectFolder": "Selectați un folder pentru scanare",
+    "tip": "Sfat: Faceți clic dreapta pentru o scanare completă a discului (mai lent)"
+  },
+  "scanning": {
+    "scanning": "Scanare",
+    "back": "Înapoi"
+  },
+  "breadcrumb": {
+    "allDisks": "Toate discurile",
+    "disk": "Disc",
+    "folder": "Folder"
+  },
+  "diskDetail": {
+    "dragToDelete": "Trageți fișierele și folderele aici pentru a le șterge",
+    "filesSelected": "{{count}} fișiere selectate -",
+    "clearSelection": "Goliți selecția",
+    "delete": "Șterge",
+    "deleting": "Se șterge {{current}} din {{total}}"
+  }
+}

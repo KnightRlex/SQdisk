@@ -1,0 +1,23 @@
+{
+  "languageName": "Ελληνικά",
+  "home": {
+    "selectFolder": "Επιλέξτε ένα φάκελο για σάρωση",
+    "tip": "Συμβουλή: Δεξί κλικ για πλήρη σάρωση δίσκου (πιο αργή)"
+  },
+  "scanning": {
+    "scanning": "Σάρωση",
+    "back": "Πίσω"
+  },
+  "breadcrumb": {
+    "allDisks": "Όλοι οι δίσκοι",
+    "disk": "Δίσκος",
+    "folder": "Φάκελος"
+  },
+  "diskDetail": {
+    "dragToDelete": "Σύρετε αρχεία και φακέλους εδώ για διαγραφή",
+    "filesSelected": "{{count}} αρχεία επιλέχθηκαν -",
+    "clearSelection": "Εκκαθάριση επιλογής",
+    "delete": "Διαγραφή",
+    "deleting": "Διαγραφή {{current}} από {{total}}"
+  }
+}

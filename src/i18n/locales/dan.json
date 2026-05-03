@@ -1,0 +1,23 @@
+{
+  "languageName": "Dansk",
+  "home": {
+    "selectFolder": "Vælg en mappe til scanning",
+    "tip": "Tip: Højreklik for en fuld diskscanning (langsommere)"
+  },
+  "scanning": {
+    "scanning": "Scanner",
+    "back": "Tilbage"
+  },
+  "breadcrumb": {
+    "allDisks": "Alle diske",
+    "disk": "Disk",
+    "folder": "Mappe"
+  },
+  "diskDetail": {
+    "dragToDelete": "Træk filer og mapper hertil for at slette",
+    "filesSelected": "{{count}} filer valgt -",
+    "clearSelection": "Ryd valg",
+    "delete": "Slet",
+    "deleting": "Sletter {{current}} af {{total}}"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "languageName": "Íslenska",
+  "home": {
+    "selectFolder": "Veldu möppu til að skanna",
+    "tip": "Ábending: Hægrismelltu fyrir fulla diskaskönnun (hægar)"
+  },
+  "scanning": {
+    "scanning": "Skannar",
+    "back": "Til baka"
+  },
+  "breadcrumb": {
+    "allDisks": "Allir diskar",
+    "disk": "Diskur",
+    "folder": "Mappa"
+  },
+  "diskDetail": {
+    "dragToDelete": "Dragðu skrár og möppur hingað til að eyða",
+    "filesSelected": "{{count}} skrár valdar -",
+    "clearSelection": "Hreinsa val",
+    "delete": "Eyða",
+    "deleting": "Eyðir {{current}} af {{total}}"
+  }
+}

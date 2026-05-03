@@ -1,0 +1,23 @@
+{
+  "languageName": "日本語",
+  "home": {
+    "selectFolder": "スキャンするフォルダーを選択",
+    "tip": "ヒント: 完全なディスクスキャンの場合は右クリック（遅い）"
+  },
+  "scanning": {
+    "scanning": "スキャン中",
+    "back": "戻る"
+  },
+  "breadcrumb": {
+    "allDisks": "すべてのディスク",
+    "disk": "ディスク",
+    "folder": "フォルダー"
+  },
+  "diskDetail": {
+    "dragToDelete": "削除するファイルやフォルダーをここにドラッグ",
+    "filesSelected": "{{count}} 個のファイルを選択中 -",
+    "clearSelection": "選択を解除",
+    "delete": "削除",
+    "deleting": "{{total}} 個中 {{current}} 個を削除中"
+  }
+}

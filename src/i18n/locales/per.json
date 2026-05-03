@@ -1,0 +1,23 @@
+{
+  "languageName": "فارسی",
+  "home": {
+    "selectFolder": "پوشه‌ای را برای اسکن انتخاب کنید",
+    "tip": "نکته: برای اسکن کامل دیسک راست‌کلیک کنید (آهسته‌تر)"
+  },
+  "scanning": {
+    "scanning": "در حال اسکن",
+    "back": "بازگشت"
+  },
+  "breadcrumb": {
+    "allDisks": "همه دیسک‌ها",
+    "disk": "دیسک",
+    "folder": "پوشه"
+  },
+  "diskDetail": {
+    "dragToDelete": "فایل‌ها و پوشه‌ها را برای حذف به اینجا بکشید",
+    "filesSelected": "{{count}} فایل انتخاب شده -",
+    "clearSelection": "پاک کردن انتخاب",
+    "delete": "حذف",
+    "deleting": "در حال حذف {{current}} از {{total}}"
+  }
+}

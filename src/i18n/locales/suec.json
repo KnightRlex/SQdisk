@@ -1,0 +1,23 @@
+{
+  "languageName": "Svenska",
+  "home": {
+    "selectFolder": "Välj en mapp att skanna",
+    "tip": "Tips: Högerklicka för en fullständig diskskanning (långsammare)"
+  },
+  "scanning": {
+    "scanning": "Skannar",
+    "back": "Tillbaka"
+  },
+  "breadcrumb": {
+    "allDisks": "Alla diskar",
+    "disk": "Disk",
+    "folder": "Mapp"
+  },
+  "diskDetail": {
+    "dragToDelete": "Dra filer och mappar hit för att ta bort",
+    "filesSelected": "{{count}} filer valda -",
+    "clearSelection": "Rensa val",
+    "delete": "Ta bort",
+    "deleting": "Tar bort {{current}} av {{total}}"
+  }
+}

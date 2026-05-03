@@ -1,0 +1,23 @@
+{
+  "languageName": "Hrvatski",
+  "home": {
+    "selectFolder": "Odaberite mapu za skeniranje",
+    "tip": "Savjet: Desni klik za potpuno skeniranje diska (sporije)"
+  },
+  "scanning": {
+    "scanning": "Skeniranje",
+    "back": "Natrag"
+  },
+  "breadcrumb": {
+    "allDisks": "Svi diskovi",
+    "disk": "Disk",
+    "folder": "Mapa"
+  },
+  "diskDetail": {
+    "dragToDelete": "Povucite datoteke i mape ovdje za brisanje",
+    "filesSelected": "{{count}} odabranih datoteka -",
+    "clearSelection": "Poništi odabir",
+    "delete": "Izbriši",
+    "deleting": "Brisanje {{current}} od {{total}}"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "languageName": "Français",
+  "home": {
+    "selectFolder": "Sélectionner un dossier à analyser",
+    "tip": "Astuce : Clic droit pour une analyse complète du disque (plus lent)"
+  },
+  "scanning": {
+    "scanning": "Analyse en cours",
+    "back": "Retour"
+  },
+  "breadcrumb": {
+    "allDisks": "Tous les disques",
+    "disk": "Disque",
+    "folder": "Dossier"
+  },
+  "diskDetail": {
+    "dragToDelete": "Faites glisser les fichiers et dossiers ici pour les supprimer",
+    "filesSelected": "{{count}} fichiers sélectionnés -",
+    "clearSelection": "Effacer la sélection",
+    "delete": "Supprimer",
+    "deleting": "Suppression de {{current}} sur {{total}}"
+  }
+}

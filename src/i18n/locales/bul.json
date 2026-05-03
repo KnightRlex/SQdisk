@@ -1,0 +1,23 @@
+{
+  "languageName": "Български",
+  "home": {
+    "selectFolder": "Изберете папка за сканиране",
+    "tip": "Съвет: Десен клик за пълно сканиране на диска (по-бавно)"
+  },
+  "scanning": {
+    "scanning": "Сканиране",
+    "back": "Назад"
+  },
+  "breadcrumb": {
+    "allDisks": "Всички дискове",
+    "disk": "Диск",
+    "folder": "Папка"
+  },
+  "diskDetail": {
+    "dragToDelete": "Плъзнете файлове и папки тук, за да ги изтриете",
+    "filesSelected": "{{count}} избрани файла -",
+    "clearSelection": "Изчисти избора",
+    "delete": "Изтриване",
+    "deleting": "Изтриване на {{current}} от {{total}}"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "languageName": "हिन्दी",
+  "home": {
+    "selectFolder": "स्कैन करने के लिए एक फ़ोल्डर चुनें",
+    "tip": "सुझाव: पूर्ण डिस्क स्कैन के लिए राइट-क्लिक करें (धीमा)"
+  },
+  "scanning": {
+    "scanning": "स्कैनिंग",
+    "back": "वापस"
+  },
+  "breadcrumb": {
+    "allDisks": "सभी डिस्क",
+    "disk": "डिस्क",
+    "folder": "फ़ोल्डर"
+  },
+  "diskDetail": {
+    "dragToDelete": "हटाने के लिए फ़ाइलें और फ़ोल्डर यहाँ खींचें",
+    "filesSelected": "{{count}} फ़ाइलें चयनित -",
+    "clearSelection": "चयन साफ़ करें",
+    "delete": "हटाएं",
+    "deleting": "{{total}} में से {{current}} हटा रहा है"
+  }
+}

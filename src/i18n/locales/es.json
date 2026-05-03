@@ -1,0 +1,23 @@
+{
+  "languageName": "Español",
+  "home": {
+    "selectFolder": "Seleccionar una carpeta para escanear",
+    "tip": "Consejo: Clic derecho para un escaneo completo del disco (más lento)"
+  },
+  "scanning": {
+    "scanning": "Escaneando",
+    "back": "Volver"
+  },
+  "breadcrumb": {
+    "allDisks": "Todos los discos",
+    "disk": "Disco",
+    "folder": "Carpeta"
+  },
+  "diskDetail": {
+    "dragToDelete": "Arrastra archivos y carpetas aquí para eliminar",
+    "filesSelected": "{{count}} archivos seleccionados -",
+    "clearSelection": "Limpiar selección",
+    "delete": "Eliminar",
+    "deleting": "Eliminando {{current}} de {{total}}"
+  }
+}

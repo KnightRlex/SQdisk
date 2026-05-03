@@ -3,8 +3,8 @@ use std::ops::Not;
 
 use regex::{Captures, Regex};
 
-use tauri::api::process::{Command as TauriCommand, CommandEvent};
-use tauri::Manager;
+use tauri_plugin_shell::{process::CommandEvent, ShellExt};
+use tauri::{Emitter, Manager};
 
 use crate::MyState;
 
@@ -47,16 +47,15 @@ pub fn start(
         paths_to_scan.push(path);
     }
 
-    let (mut rx, child) = TauriCommand::new_sidecar("pdu")
-        .expect("failed to create `my-sidecar` binary command")
+    let shell = app_handle.shell();
+    
+    let (mut rx, child) = shell.sidecar("pdu")
+        .expect("failed to create `pdu` sidecar command")
         .args(paths_to_scan)
         .spawn()
         .expect("Failed to spawn sidecar");
     
     *state.0.lock().unwrap() = Some(child);
-
-    // unlisten to the event using the `id` returned on the `listen_global` function
-    // an `once_global` API is also exposed on the `App` struct
 
     let re = Regex::new(r"\(scanned ([0-9]*), total ([0-9]*)(?:, erred ([0-9]*))?\)").unwrap();
 
@@ -64,13 +63,15 @@ pub fn start(
         while let Some(event) = rx.recv().await {
             match event {
                 CommandEvent::Stdout(line) => {
-                    //println!("Stdout:{}", &line);
-                    app_handle.emit_all("scan_completed", line).ok();
+                    // CAMBIO TAURI 2: Convertir Vec<u8> a String
+                    let line_str = String::from_utf8_lossy(&line);
+                    app_handle.emit("scan_completed", line_str.to_string()).ok();
                 }
                 CommandEvent::Stderr(msg) => {
-                    // println!("Stderr:{}", &msg);
-
-                    let caps = re.captures(&msg);
+                    // CAMBIO TAURI 2: Convertir Vec<u8> a String antes de pasar al Regex
+                    let msg_str = String::from_utf8_lossy(&msg);
+                    let caps = re.captures(&msg_str);
+                    
                     if let Some(groups) = caps {
                         if groups.len() > 2 {
                             emit_scan_status(&app_handle, groups)
@@ -79,113 +80,14 @@ pub fn start(
                 }
                 CommandEvent::Terminated(t) => {
                     println!("{t:?}");
-                    // app_handle.unlisten(id);
-                    // child.kill();
                 }
-                _ => unimplemented!(),
+                _ => {}
             };
-            // if let CommandEvent::Stdout(line) = event {
-            //     println!("StdErr: {}", line);
-            // } else {
-            //     println!("Terminated {}", event);
-            // }
-            // if let CommandEvent::Stderr(line) = event {
-            //     println!("StdErr: {}", line);
-            // }
-            // if let CommandEvent::Terminated(line) = event {
-            //     println!("Terminated");
-            // }
         }
         Result::<(), ()>::Ok(())
     });
 
     Ok(())
-    // thread::spawn(move || {
-    //     let path = PathBuf::from(path);
-    //     let mut vec: Vec<PathBuf> = Vec::new();
-    //     vec.push(path);
-
-    //     fn progress_and_error_reporter<Data>(
-    //         app_handle: tauri::AppHandle,
-    //     ) -> ProgressAndErrorReporter<Data, fn(ErrorReport)>
-    //     where
-    //         Data: Size + Into<u64> + Send + Sync,
-    //         ProgressReport<Data>: Default + 'static,
-    //         u64: Into<Data>,
-    //     {
-    //         let progress_reporter = move |report: ProgressReport<Data>| {
-    //             let ProgressReport {
-    //                 items,
-    //                 total,
-    //                 errors,
-    //             } = report;
-    //             let mut text = String::new();
-    //             write!(
-    //                 text,
-    //                 "\r(scanned {items}, total {total}",
-    //                 items = items,
-    //                 total = total.into(),
-    //             )
-    //             .unwrap();
-    //             if errors != 0 {
-    //                 write!(text, ", erred {}", errors).unwrap();
-    //             }
-    //             write!(text, ")").unwrap();
-    //             println!("{}", text);
-    //             app_handle
-    //                 .emit_all(
-    //                     "scan_status",
-    //                     Payload {
-    //                         items: items,
-    //                         total: total.into(),
-    //                         errors: errors,
-    //                     },
-    //                 )
-    //                 .unwrap();
-    //         };
-
-    //         struct TextReport<'a>(ErrorReport<'a>);
-
-    //         impl<'a> Display for TextReport<'a> {
-    //             fn fmt(&self, formatter: &mut Formatter<'_>) -> Result<(), Error> {
-    //                 write!(
-    //                     formatter,
-    //                     "[error] {operation} {path:?}: {error}",
-    //                     operation = self.0.operation.name(),
-    //                     path = self.0.path,
-    //                     error = self.0.error,
-    //                 )
-    //             }
-    //         }
-
-    //         let error_reporter: fn(ErrorReport) = |report| {
-    //             let message = TextReport(report).to_string();
-    //             println!("{}", message);
-    //         };
-
-    //         ProgressAndErrorReporter::new(
-    //             progress_reporter,
-    //             Duration::from_millis(100),
-    //             error_reporter,
-    //         )
-    //     }
-    //     // pub struct MyReporter {}
-    //     // impl parallel_disk_usage::reporter::progress_and_error_reporter
-    //     let pdu = parallel_disk_usage::app::Sub {
-    //         json_output: true,
-    //         direction: Direction::BottomUp,
-    //         bar_alignment: BarAlignment::Right,
-    //         get_data: GET_APPARENT_SIZE,
-    //         files: vec,
-    //         no_sort: true,
-    //         min_ratio: 0.01.try_into().unwrap(),
-    //         max_depth: 10.try_into().unwrap(),
-    //         reporter: progress_and_error_reporter(app_handle),
-    //         bytes_format: BytesFormat::MetricUnits,
-    //         column_width_distribution: ColumnWidthDistribution::total(100),
-    //     }
-    //     .run();
-    // });
 }
 
 pub fn stop(state: tauri::State<'_, MyState>) {
@@ -201,7 +103,7 @@ pub fn stop(state: tauri::State<'_, MyState>) {
 
 fn emit_scan_status(app_handle: &tauri::AppHandle, groups: Captures) {
     app_handle
-        .emit_all(
+        .emit(
             "scan_status",
             Payload {
                 items: groups
@@ -225,4 +127,4 @@ fn emit_scan_status(app_handle: &tauri::AppHandle, groups: Captures) {
             },
         )
         .unwrap();
-}
+} 

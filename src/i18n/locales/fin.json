@@ -1,0 +1,23 @@
+{
+  "languageName": "Suomi",
+  "home": {
+    "selectFolder": "Valitse skannattava kansio",
+    "tip": "Vinkki: Napsauta hiiren kakkospainikkeella koko levyn skannausta varten (hitaampi)"
+  },
+  "scanning": {
+    "scanning": "Skannataan",
+    "back": "Takaisin"
+  },
+  "breadcrumb": {
+    "allDisks": "Kaikki levyt",
+    "disk": "Levy",
+    "folder": "Kansio"
+  },
+  "diskDetail": {
+    "dragToDelete": "Vedä tiedostot ja kansiot tähän poistaaksesi",
+    "filesSelected": "{{count}} tiedostoa valittu -",
+    "clearSelection": "Tyhjennä valinta",
+    "delete": "Poista",
+    "deleting": "Poistetaan {{current}} / {{total}}"
+  }
+}

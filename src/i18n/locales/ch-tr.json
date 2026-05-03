@@ -1,0 +1,23 @@
+{
+  "languageName": "繁體中文",
+  "home": {
+    "selectFolder": "選擇要掃描的資料夾",
+    "tip": "提示：右鍵按一下進行全碟掃描（較慢）"
+  },
+  "scanning": {
+    "scanning": "掃描中",
+    "back": "返回"
+  },
+  "breadcrumb": {
+    "allDisks": "所有磁碟",
+    "disk": "磁碟",
+    "folder": "資料夾"
+  },
+  "diskDetail": {
+    "dragToDelete": "將檔案和資料夾拖曳到此處刪除",
+    "filesSelected": "已選擇 {{count}} 個檔案 -",
+    "clearSelection": "清除選擇",
+    "delete": "刪除",
+    "deleting": "正在刪除 {{current}} / {{total}}"
+  }
+}
