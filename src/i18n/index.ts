@@ -34,7 +34,12 @@ import tail from './locales/tail.json';
 import turc from './locales/turc.json';
 import viet from './locales/viet.json';
 
-const savedLanguage = localStorage.getItem('appLanguage') || 'en';
+const savedLanguage = localStorage.getItem('appLanguage') || navigator.language;
+
+// Save system language on first run
+if (!localStorage.getItem('appLanguage')) {
+  localStorage.setItem('appLanguage', savedLanguage);
+}
 
 i18n
   .use(initReactI18next)
