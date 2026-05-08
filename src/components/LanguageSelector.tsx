@@ -59,7 +59,7 @@ export const LanguageSelector = () => {
   };
 
   // Obtener el idioma actual
-  const currentLang = languages.find(l => l.code === i18n.language) || languages[10];
+  const currentLang = languages.find(l => l.code === i18n.resolvedLanguage) || languages[10];
 
   return (
     <div className="absolute top-2 right-24 z-50" ref={menuRef}>
