@@ -13,7 +13,7 @@ import {
 } from "../pruneData";
 import { FileLine } from "./FileLine";
 import { ParentFolder } from "./ParentFolder";
-import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
 import { invoke } from "@tauri-apps/api/core";
 import { emit, listen } from "@tauri-apps/api/event";
 

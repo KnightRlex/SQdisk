@@ -2,7 +2,7 @@ import prettyBytes from "pretty-bytes";
 import { buildFullPath } from "../pruneData";
 import { getIconForFile, getIconForFolder } from "vscode-icons-js";
 // import { iconImages } from "./iconImages";
-import { Draggable } from "react-beautiful-dnd";
+import { Draggable } from '@hello-pangea/dnd';
 import { invoke } from "@tauri-apps/api/core";
 
 interface FileLineProps {
