@@ -57,7 +57,7 @@ Esta versión se encuentra en desarrollo activo.
 1. Para la primera ejecución: **Clic derecho > Abrir**. Si aparece un aviso de seguridad, ciérralo y repite **Clic derecho > Abrir**. Esto solo es necesario la primera vez.
 
 > [!WARNING] 
-> Aun no testeado en Mac/Linux
+> Aun no testeado en Mac
 
 ---
 

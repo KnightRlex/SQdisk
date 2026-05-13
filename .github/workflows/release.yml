@@ -1,0 +1,83 @@
+name: Publicar Release Multiplataforma
+
+# Esto se ejecuta solo cuando empujas un "Tag" que empiece con "v" (ej: v1.0.0)
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    permissions:
+      contents: write # Permiso para que GitHub cree el Release
+    
+    # Estrategia: Compilar en varios sistemas al mismo tiempo
+    strategy:
+      fail-fast: false # ¡CLAVE! Si macOS falla, Windows y Linux siguen subiendo.
+      matrix:
+        include:
+          - platform: windows-latest
+            args: '--bundles msi'
+          - platform: ubuntu-22.04
+            args: '--bundles deb,rpm,appimage'
+          - platform: macos-latest
+            target: 'aarch64-apple-darwin' # Mac Silicon (M1/M2/M3)
+            args: '--bundles dmg --target aarch64-apple-darwin'
+          - platform: macos-latest
+            target: 'x86_64-apple-darwin' # Mac Intel
+            args: '--bundles dmg --target x86_64-apple-darwin'
+
+    runs-on: ${{ matrix.platform }}
+
+    steps:
+      - name: Descargar código
+        uses: actions/checkout@v4
+
+      - name: Instalar Rust (estable)
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }} # Si es Mac, instala el compilador extra
+
+      - name: Preparar cache de Rust
+        uses: swatinem/rust-cache@v2
+        with:
+          workspaces: './src-tauri -> target'
+
+      - name: Instalar dependencias (Solo Linux)
+        if: matrix.platform == 'ubuntu-22.04'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
+
+      - name: Compilar y Empaquetar Tauri
+        id: tauri_build
+        uses: tauri-apps/tauri-action@v0
+        continue-on-error: true # ¡CLAVE! Si falla, no mata el proceso, pasa al siguiente paso
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tagName: ${{ github.ref_name }}
+          releaseName: 'Versión ${{ github.ref_name }}'
+          releaseBody: 'Automáticamente generada. Revisa los logs de macOS si fallaron.'
+          releaseDraft: false
+          prerelease: false
+          args: ${{ matrix.args }}
+
+      # --- MANEJO DE ERRORES ESPECÍFICO PARA MAC ---
+      - name: Evaluar error de macOS y guardar Log
+        if: failure() && matrix.platform == 'macos-latest'
+        run: |
+          echo "============================================="
+          echo "❌ LA COMPILACIÓN DE MAC ( ${{ matrix.target }} ) FALLÓ"
+          echo "============================================="
+          echo "Guardando el log de error en un archivo para el Release..."
+          # Extrae el log de error de Rust y lo guarda en un archivo de texto
+          echo "Error detectado en la plataforma ${{ matrix.target }}.\n\nRevisa los pasos de GitHub Actions para ver el error exacto de compilación." > error_mac_${{ matrix.target }}.txt
+          
+      - name: Subir Log de Error al Release (Si falló Mac)
+        if: failure() && matrix.platform == 'macos-latest'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: error_mac_${{ matrix.target }}.txt
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
