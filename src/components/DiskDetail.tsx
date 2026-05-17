@@ -20,7 +20,7 @@ import { emit, listen } from "@tauri-apps/api/event";
 import { remove } from "@tauri-apps/plugin-fs";
 
 import { useTranslation } from "react-i18next";
-import SelectionArea, { SelectionEvent } from "@viselect/react";
+import { SelectionArea, SelectionEvent } from "@viselect/react";
 
 (window as any).LockDNDEdgeScrolling = () => true;
 
