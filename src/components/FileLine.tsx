@@ -32,14 +32,16 @@ export const FileLine = ({
       {(provided, snapshot) => (
         <div
           className={
-            "bg-gray-900 p-2 text-white flex justify-between rounded-md mt-1 pl-4 cursor-pointer hover:bg-black/20 relative " +
-            (isHighlighted ? "bg-black/20 " : " ") +
-            (hoveredItem && item.data && hoveredItem.id === item.data.id
-              ? "bg-black/20"
-              : " ") +
+            "p-2 text-white flex justify-between rounded-md mt-1 pl-4 cursor-pointer relative transition-colors duration-150 " +
+
+            // Mutually exclusive highlight states: hovered vs selected
+            (isHighlighted
+              ? "bg-zinc-800 "
+              : "bg-gray-900 hover:bg-black/25 ") +
+              
             (deleteMap.has(item.data.id)
-              ? "border border-red-800 hover:border-red-900"
-              : " ")
+              ? "border border-red-800 hover:border-red-900 "
+              : "border border-transparent ")
           }
           onContextMenu={(e) => {
             e.preventDefault();
