@@ -377,20 +377,21 @@ const Scanning = () => {
                                 current: 0,
                               });
                               let successful: Array<D3HierarchyDiskItem> = [];
+                              let failed: Array<{diskItem: D3HierarchyDiskItem, error: unknown}> = [];
                               for (let node of deleteList) {
                                 const nodePath = buildFullPath(node)
                                   .replace("\\/", "/")
                                   .replace("\\", "/");
                                 try {
-                                  await remove(nodePath, { recursive: true }).catch((err) =>
-                                    console.error(err)
-                                  );
+                                  await remove(nodePath, { recursive: true })
+
                                   successful.push(node);
                                   setDeleteState((prev) => ({
                                     ...prev,
                                     current: prev.current + 1,
                                   }));
                                 } catch (e) {
+                                  failed.push({ diskItem: node, error: e });
                                   console.error(e);
                                 }
                               }
