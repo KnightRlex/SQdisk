@@ -38,8 +38,9 @@ windows-sys = { version = "0.59", features = [
 ] }
 
 [target."cfg(target_os = \"macos\")".dependencies]
-cocoa = "0.26" # Actualizada ligeramente para estabilidad con 0.6
-objc = "0.2"
+objc2 = "0.6.4"
+objc2-foundation = "0.3.2"
+objc2-app-kit = "0.3.2"
 
 [features]
 default = ["custom-protocol"]
