@@ -310,7 +310,7 @@ const Scanning = () => {
                 {Array.from(errors.values()).map(e => {
                   if (showErrorDialogMap.get(e.key) !== true) return null;
                   return (
-                    <ErrorDialog message={t('diskDetail.deletionFailure', { file: e.diskItem.data.name })} error={e.error} onClose={() => {
+                    <ErrorDialog title={t('diskDetail.deletionFailure', { file: e.diskItem.data.name })} error={e.error} onClose={() => {
 
                       setShowErrorDialogMap(copyMapWithoutKey(showErrorDialogMap, e.key));
                       setErrors(copyMapWithoutKey(errors, e.key));
