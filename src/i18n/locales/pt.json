@@ -18,6 +18,8 @@
     "filesSelected": "{{count}} arquivos selecionados -",
     "clearSelection": "Limpar seleção",
     "delete": "Excluir",
-    "deleting": "Excluindo {{current}} de {{total}}"
-  }
+    "deleting": "Excluindo {{current}} de {{total}}",
+    "deletionFailure": "Falha ao excluir \"{{file}}\""
+  },
+  "close": "Fechar"
 }

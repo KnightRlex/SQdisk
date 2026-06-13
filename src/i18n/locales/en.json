@@ -18,6 +18,8 @@
     "filesSelected": "{{count}} files selected -",
     "clearSelection": "Clear Selection",
     "delete": "Delete",
-    "deleting": "Deleting {{current}} of {{total}}"
-  }
+    "deleting": "Deleting {{current}} of {{total}}",
+    "deletionFailure": "Failed to delete \"{{file}}\""
+  },
+  "close": "Close"
 }

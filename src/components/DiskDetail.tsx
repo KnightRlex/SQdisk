@@ -21,6 +21,8 @@ import { remove } from "@tauri-apps/plugin-fs";
 
 import { useTranslation } from "react-i18next";
 import { SelectionArea, SelectionEvent } from "@viselect/react";
+import { Snackbar, SnackbarContainer, SnackbarSeverity } from "./Snackbar";
+import { ErrorDialog } from "./ErrorDialog";
 
 (window as any).LockDNDEdgeScrolling = () => true;
 
@@ -54,6 +56,8 @@ const Scanning = () => {
   const [deleteList, setDeleteList] = useState<Array<D3HierarchyDiskItem>>([]);
   const deleteMap = useRef<Map<string, boolean>>(new Map());
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+  const [showErrorDialogMap, setShowErrorDialogMap] = useState<Map<number, boolean>>(new Map());
+  const [errors, setErrors] = useState<Map<number, {diskItem: D3HierarchyDiskItem, error: unknown, key: number}>>(new Map());
 
   const selectedIdsRef = useRef(selectedIds);
   useEffect(() => {
@@ -134,6 +138,18 @@ const Scanning = () => {
     const secs = (seconds % 60).toString().padStart(2, '0');
     return `${mins}:${secs}`;
   };
+
+  const createSnackbarAndAlert = (diskItem: D3HierarchyDiskItem, error: unknown, key: number) => {
+    setErrors((prev) => new Map(prev).set(Date.now(), { diskItem, error, key }));
+    setShowErrorDialogMap((prev) => new Map(prev).set(key, false));
+  }
+
+  function copyMapWithoutKey<K, V>(map: Map<K, V>, keyToRemove: K): Map<K, V> {
+    const copy = new Map(map);
+    copy.delete(keyToRemove);
+    console.log(copy);
+    return copy;
+  }
 
   useEffect(() => {
     if (baseData.current) {
@@ -277,7 +293,30 @@ const Scanning = () => {
           >
             <div className="flex flex-1">
               <div id="d3-tooltip" className="d3-tooltip" style={{ display: 'none' }}></div>
-              <div className="chartpartition flex-1 flex justify-items-center items-center">
+              <div className="chartpartition relative flex-1 flex justify-items-center items-center">
+                {errors.size > 0 &&
+                  <SnackbarContainer>
+                    {Array.from(errors.values()).map(e => (
+                      console.log(errors.size),
+                      console.log(e.diskItem.name),
+                      <>
+                        <Snackbar message={t('diskDetail.deletionFailure', { file: e.diskItem.data.name })} severity={SnackbarSeverity.ERROR} onClick={() => {
+                          setShowErrorDialogMap((prev) => new Map(prev).set(e.key, true));
+                        }} />
+                      </>
+                    ))}
+                  </SnackbarContainer>
+                }
+                {Array.from(errors.values()).map(e => {
+                  if (showErrorDialogMap.get(e.key) !== true) return null;
+                  return (
+                    <ErrorDialog message={t('diskDetail.deletionFailure', { file: e.diskItem.data.name })} error={e.error} onClose={() => {
+
+                      setShowErrorDialogMap(copyMapWithoutKey(showErrorDialogMap, e.key));
+                      setErrors(copyMapWithoutKey(errors, e.key));
+                    }} />
+                  );
+                })}
                 <svg
                   ref={svgRef}
                   width={"100%"}
@@ -377,7 +416,7 @@ const Scanning = () => {
                                 current: 0,
                               });
                               let successful: Array<D3HierarchyDiskItem> = [];
-                              let failed: Array<{diskItem: D3HierarchyDiskItem, error: unknown}> = [];
+                              let errorKey = 0;
                               for (let node of deleteList) {
                                 const nodePath = buildFullPath(node)
                                   .replace("\\/", "/")
@@ -391,8 +430,9 @@ const Scanning = () => {
                                     current: prev.current + 1,
                                   }));
                                 } catch (e) {
-                                  failed.push({ diskItem: node, error: e });
+                                  setErrors((prev) => new Map(prev).set(errorKey, { diskItem: node, error: e, key: errorKey }));
                                   console.error(e);
+                                  errorKey += 1;
                                 }
                               }
                               d3Chart.current.deleteNodes(successful);
