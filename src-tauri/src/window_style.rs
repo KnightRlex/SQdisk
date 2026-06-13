@@ -11,13 +11,22 @@ pub fn set_window_styles(window: impl raw_window_handle::HasWindowHandle) -> Res
     match handle.as_raw() {
         #[cfg(target_os = "macos")]
         raw_window_handle::RawWindowHandle::AppKit(handle) => {
-            use cocoa::{appkit::NSWindow, base::id};
-            use objc::{msg_send, runtime::YES};
+            use objc2::{msg_send, runtime::AnyObject};
 
             unsafe {
-                let ns_view = handle.ns_view.as_ptr() as id;
-                let window: id = msg_send![ns_view, window];
-                window.setHasShadow_(YES);
+                let ns_view = handle.ns_view.as_ptr() as *const AnyObject;
+                
+                if ns_view.is_null() { return Ok(()); }
+
+                // Get the window pointer
+                let window: *mut AnyObject = msg_send![ns_view, window];
+
+                if window.is_null() {
+                    return Ok(()); 
+                }
+
+                let _: () = msg_send![window, setHasShadow: true];
+                let _: () = msg_send![window, invalidateShadow];
             }
 
             Ok(())

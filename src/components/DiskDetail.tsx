@@ -320,11 +320,11 @@ const Scanning = () => {
                 <svg
                   ref={svgRef}
                   width={"100%"}
-                  style={{ maxHeight: "calc(100vh - 40px)" }}
+                  style={{ maxHeight: "calc(100vh - var(--title-bar-height))" }}
                 />
               </div>
 
-              <div className="bg-gray-900 w-1/3 p-2 flex flex-col">
+              <div className="bg-gray-900 w-1/3 p-2 flex flex-col max-h-[calc(100vh_-_var(--title-bar-height))] box-border">
                 {focusedDirectory && (
                   <ParentFolder
                     focusedDirectory={focusedDirectory}
@@ -332,7 +332,7 @@ const Scanning = () => {
                   ></ParentFolder>
                 )}
                 <SelectionArea
-                  className="container overflow-y-auto"
+                  className="container overflow-y-auto box-border"
                   style={{ flex: "1 1 auto", height: 100 }}
                   onBeforeStart={onBeforeStart}
                   onStart={onStart}

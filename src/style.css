@@ -31,6 +31,15 @@ body {
   100% { opacity: 1; }
 }
 
+:root {
+  --title-bar-height: 48px;
+}
+
+@theme {
+  /* This maps your variable to sizing utilities (height, width, padding, margin) */
+  --spacing-titlebar: var(--title-bar-height);
+}
+
 .selection-area {
   background: rgba(46, 115, 252, 0.11);
   border: 2px solid rgba(98, 155, 255, 0.81);
