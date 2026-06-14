@@ -62,7 +62,6 @@ const Scanning = () => {
   const [deleteList, setDeleteList] = useState<Array<D3HierarchyDiskItem>>([]);
   const deleteMap = useRef<Map<string, boolean>>(new Map());
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
-  const [showErrorDialogMap, setShowErrorDialogMap] = useState<Map<number, boolean>>(new Map());
   const [errors, setErrors] = useState<Map<number, DeletionErrorState>>(new Map());
 
   const selectedIdsRef = useRef(selectedIds);
@@ -143,15 +142,6 @@ const Scanning = () => {
     const mins = Math.floor(seconds / 60).toString().padStart(2, '0');
     const secs = (seconds % 60).toString().padStart(2, '0');
     return `${mins}:${secs}`;
-  };
-
-  const createSnackbarAndAlert = (diskItem: D3HierarchyDiskItem, error: unknown) => {
-    const key = Date.now();
-    setErrors((prev) => {
-      const next = new Map(prev);
-      next.set(key, { diskItem, error, isOpen: false });
-      return next;
-    });
   };
 
   const setDialogVisibility = (key: number, isOpen: boolean) => {
@@ -324,6 +314,7 @@ const Scanning = () => {
                         message={t('diskDetail.deletionFailure', { file: e.diskItem.data.name })}
                         severity={SnackbarSeverity.ERROR}
                         onClick={() => setDialogVisibility(key, true)}
+                        onTimeout={() => removeError(key)}
                       />
                     ))}
                   </SnackbarContainer>
@@ -336,7 +327,7 @@ const Scanning = () => {
                       key={key}
                       title={t('diskDetail.deletionFailure', { file: e.diskItem.data.name })}
                       error={e.error}
-                      onClose={() => removeError(key)} // Evict from memory on close
+                      onClose={() => removeError(key)}
                     />
                   );
                 })}

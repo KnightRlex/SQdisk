@@ -89,3 +89,49 @@ body {
   border: 1px solid rgba(255,255,255,0.1);
   backdrop-filter: blur(10px);
 }
+
+.snackbar-progress-track {
+  width: 100%;
+  height: 6px;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  width: 0%; /* Initial state before animation */
+  border-top-right-radius: 240px;
+  border-bottom-right-radius: 240px;
+}
+
+/* --- ERROR THEME --- */
+.error-progress { 
+  background-color: #4d0f0f; 
+}
+.error-progress .progress-bar-fill { 
+  background-color: rgb(228, 149, 149); 
+}
+
+/* --- WARNING THEME --- */
+.warning-progress { 
+  background-color: #451a03; 
+}
+.warning-progress .progress-bar-fill { 
+  background-color: #f59e0b; 
+}
+
+/* --- SUCCESS THEME --- */
+.success-progress { 
+  background-color: hsl(164, 86%, 12%); 
+  border-radius: 13px; 
+}
+.success-progress .progress-bar-fill { 
+  background-color: #10b981; 
+  border-radius: 13px;
+}
+
+/* --- INFO THEME --- */
+.info-progress { 
+  background-color: #172554; 
+}
+.info-progress .progress-bar-fill { 
+  background-color: #3b82f6; 
+}
