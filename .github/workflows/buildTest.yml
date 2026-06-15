@@ -52,11 +52,10 @@ jobs:
         with:
           workspaces: './src-tauri -> target'
 
-      - name: Sync node version and setup cache
-        uses: actions/setup-node@v3
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
         with:
-          node-version: 'lts/*'
-          cache: 'pnpm' # Set this to npm, yarn or pnpm.
+          version: 10
 
       - name: Install app dependencies and build web
         run: pnpm i && pnpm run build # Change this to npm, yarn or pnpm.    
