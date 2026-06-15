@@ -59,7 +59,7 @@ jobs:
           version: 10
 
       - name: Install app dependencies and build web
-        run: pnpm i && pnpm run build # Change this to npm, yarn or pnpm.    
+        run: pnpm i --no-frozen-lockfile && pnpm run build # Change this to npm, yarn or pnpm.    
 
       - name: Verify Tauri Build Compiles
         uses: tauri-apps/tauri-action@v0
