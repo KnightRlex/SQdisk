@@ -30,7 +30,7 @@ const TitleBar = () => {
   const { t } = useTranslation(); // <--- NUEVO
 
   return (
-    <div data-tauri-drag-region className="flex bg-cyan-800 h-12 justify-between w-full items-center pl-3 pr-3 titlebar text-white" style={{ background: "#0F1831" }}>
+    <div data-tauri-drag-region className="flex bg-cyan-800 h-titlebar justify-between w-full items-center pl-3 pr-3 titlebar text-white" style={{ background: "#0F1831" }}>
       {plf !== "macos" ? <img src={Logo} className="h-6 w-6" /> : <CloseButton />}
       <div className="font-bold">
         <nav className="flex navi" aria-label="Breadcrumb">
