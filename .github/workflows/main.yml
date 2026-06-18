@@ -32,15 +32,14 @@ jobs:
         with:
           workspaces: './src-tauri -> target'
 
-      - name: Sync node version and setup cache
-        uses: actions/setup-node@v3
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
         with:
-          node-version: 'lts/*'
-          cache: 'npm' # Set this to npm, yarn or pnpm.
+          version: 10
 
       - name: Install app dependencies and build web
         # Remove `&& yarn build` if you build your frontend in `beforeBuildCommand`
-        run: npm i && npm run build # Change this to npm, yarn or pnpm.
+        run: pnpm i --no-frozen-lockfile && pnpm run build # Change this to npm, yarn or pnpm.
           
       - name: Build the app
         uses: tauri-apps/tauri-action@v0
