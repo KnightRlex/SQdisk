@@ -8,9 +8,33 @@
   "permissions": [
     "fs:default",
     "fs:allow-remove", 
+    "fs:allow-exists",
     {
       "identifier": "fs:scope",
-      "allow": ["**/*"]
+      "allow": [
+        "**/*",
+        "/**",
+        "$HOME/**",
+        "$HOME/.*/**"
+      ]
+    },
+        {
+      "identifier": "fs:allow-remove",
+      "allow": [
+        "**/*",
+        "/**",
+        "$HOME/**",
+        "$HOME/.*/**"
+      ]
+    },
+        {
+      "identifier": "fs:allow-exists",
+      "allow": [
+        "**/*",
+        "/**",
+        "$HOME/**",
+        "$HOME/.*/**"
+      ]
     }
   ]
 }
