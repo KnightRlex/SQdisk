@@ -13,11 +13,10 @@ import {
 } from "../pruneData";
 import { FileLine } from "./FileLine";
 import { ParentFolder } from "./ParentFolder";
+import { DeleteButton } from "./DeleteButton";
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
 import { invoke } from "@tauri-apps/api/core";
 import { emit, listen } from "@tauri-apps/api/event";
-
-import { remove } from "@tauri-apps/plugin-fs";
 
 import { useTranslation } from "react-i18next";
 import { SelectionArea, SelectionEvent } from "@viselect/react";
@@ -422,8 +421,8 @@ const Scanning = () => {
                         )}
                         <div>{provided.placeholder}</div>
                         {deleteList.length > 0 && (
-                          <button
-                            onClick={async () => {
+                          <DeleteButton
+                            onDelete={async () => {
                               setDeleteState({
                                 isDeleting: true,
                                 total: deleteList.length,
@@ -436,7 +435,7 @@ const Scanning = () => {
                                   .replace("\\/", "/")
                                   .replace("\\", "/");
                                 try {
-                                  await remove(nodePath, { recursive: true })
+                                  await invoke("remove_path", { path: nodePath });
 
                                   successful.push(node);
                                   setDeleteState((prev) => ({
@@ -458,14 +457,10 @@ const Scanning = () => {
                               setDeleteList([]);
                               deleteMap.current.clear();
                             }}
-                            type="button"
-                            disabled={deleteState.isDeleting}
-                            className="text-white w-full mt-3 bg-gradient-to-r from-red-600 via-red-700 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:ring-red-300 focus:ring-red-800 shadow-sm shadow-red-500/50 shadow-lg shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-                          >
-                            {deleteState.isDeleting
-                              ? t('diskDetail.deleting', { current: deleteState.current, total: deleteState.total })
-                              : t('diskDetail.delete')}
-                          </button>
+                            isDeleting={deleteState.isDeleting}
+                            total={deleteState.total}
+                            current={deleteState.current}
+                          />
                         )}
                       </div>
                     </div>
