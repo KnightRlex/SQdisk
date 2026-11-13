@@ -35,7 +35,6 @@ fn main() {
         
         .plugin(tauri_plugin_shell::init())
         .plugin(tauri_plugin_os::init())     
-        .plugin(tauri_plugin_fs::init())     
         .plugin(tauri_plugin_dialog::init()) 
         
         .manage(MyState(Default::default()))
@@ -59,10 +58,24 @@ fn main() {
             get_disks,
             start_scanning,
             stop_scanning,
-            show_in_folder
+            show_in_folder,
+            remove_path
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
+}
+
+#[tauri::command(async)]
+fn remove_path(path: String) -> Result<(), String> {
+    let path = std::path::Path::new(&path);
+    let metadata = std::fs::symlink_metadata(path).map_err(|e| e.to_string())?;
+
+    if metadata.is_dir() {
+        std::fs::remove_dir_all(path)
+    } else {
+        std::fs::remove_file(path)
+    }
+    .map_err(|e| e.to_string())
 }
 
 #[tauri::command]

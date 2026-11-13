@@ -135,3 +135,17 @@ body {
 .info-progress .progress-bar-fill { 
   background-color: #3b82f6; 
 }
+
+@keyframes windowsSheen {
+  from {
+    transform: translateX(-100%) skewX(-15deg);
+  }
+
+  to {
+    transform: translateX(100%) skewX(-15deg);
+  }
+}
+
+.windows-shimmer {
+  animation: windowsSheen 2s infinite linear;
+}

@@ -17,15 +17,15 @@ importers:
       '@tauri-apps/plugin-dialog':
         specifier: ^2.7.1
         version: 2.7.1
-      '@tauri-apps/plugin-fs':
-        specifier: ^2.5.1
-        version: 2.5.1
       '@tauri-apps/plugin-os':
         specifier: ^2.3.2
         version: 2.3.2
       '@tauri-apps/plugin-shell':
         specifier: ^2.3.5
         version: 2.3.5
+      '@viselect/react':
+        specifier: ^3.6.0
+        version: 3.10.1(react@19.2.6)
       d3:
         specifier: ^7.9.0
         version: 7.9.0
@@ -581,9 +581,6 @@ packages:
   '@tauri-apps/plugin-dialog@2.7.1':
     resolution: {integrity: sha512-OK1UBXYt+ojcmxMktzzuyonYIFta8CmAASpX+CA+DTGK24KlHjhYI6x2iOJ/TjZF4N7/ACK1oFmEOjIY9IhzOQ==}
 
-  '@tauri-apps/plugin-fs@2.5.1':
-    resolution: {integrity: sha512-9Lz+Jopp6QyeEWhlpkMx4R/+P9HgR+AVAI4vOZhlT8Xaymtz8iVI/Ov984/XTqgJz/5gz5NretqPB/XEMS3NhQ==}
-
   '@tauri-apps/plugin-os@2.3.2':
     resolution: {integrity: sha512-n+nXWeuSeF9wcEsSPmRnBEGrRgOy6jjkSU+UVCOV8YUGKb2erhDOxis7IqRXiRVHhY8XMKks00BJ0OAdkpf6+A==}
 
@@ -705,6 +702,14 @@ packages:
 
   '@types/use-sync-external-store@0.0.6':
     resolution: {integrity: sha512-zFDAD+tlpf2r4asuHEj0XH6pY6i0g5NeAHPn+15wk3BV6JA69eERFXC1gyGThDkVa1zCyKr5jox1+2LbV/AMLg==}
+
+  '@viselect/react@3.10.1':
+    resolution: {integrity: sha512-BJVf8ZoBZg5Y8qQ35iOg2FnSClDNw0hjmoYEY6VaWTPqqMLDJ8C8kdK699KRW0FNf6OnwzlqZXaxhq9pxUx1tw==}
+    peerDependencies:
+      react: '>=19.0.0'
+
+  '@viselect/vanilla@3.10.1':
+    resolution: {integrity: sha512-e0gwuYRXMftxwfuqVX0NyQAxPnrYVwA+agvKqEdVeDz+6iJXV0FN9VsI8vHLLh3K5zcl601w8seUXLiWb2kTwQ==}
 
   '@vitejs/plugin-react@6.0.1':
     resolution: {integrity: sha512-l9X/E3cDb+xY3SWzlG1MOGt2usfEHGMNIaegaUGFsLkb3RCn/k8/TOXBcab+OndDI4TBtktT8/9BwwW8Vi9KUQ==}
@@ -1546,10 +1551,6 @@ snapshots:
     dependencies:
       '@tauri-apps/api': 2.11.0
 
-  '@tauri-apps/plugin-fs@2.5.1':
-    dependencies:
-      '@tauri-apps/api': 2.11.0
-
   '@tauri-apps/plugin-os@2.3.2':
     dependencies:
       '@tauri-apps/api': 2.11.0
@@ -1697,6 +1698,13 @@ snapshots:
       csstype: 3.2.3
 
   '@types/use-sync-external-store@0.0.6': {}
+
+  '@viselect/react@3.10.1(react@19.2.6)':
+    dependencies:
+      '@viselect/vanilla': 3.10.1
+      react: 19.2.6
+
+  '@viselect/vanilla@3.10.1': {}
 
   '@vitejs/plugin-react@6.0.1(vite@8.0.12(@types/node@25.7.0)(esbuild@0.28.0)(jiti@2.7.0))':
     dependencies:
